@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import img_product from '../img/product.png'
+import Coupon from './coupon';
 import '../css/Product.css';
+
+
 
 class Product extends Component {
   render() {
@@ -9,9 +12,8 @@ class Product extends Component {
             <div className="img-product">
                 <img src={img_product} alt="imag"/>
             </div> 
-            <div className="coupon-product">
-
-         
+            <div>
+                <Coupon />
             </div> 
             <div className="cost-product">
                 <div className="cost-title">

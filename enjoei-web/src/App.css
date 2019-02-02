@@ -16,7 +16,7 @@
   max-width: 50px;
 }
 
-.App-header {
+.App-header, .cost-container{
   border-bottom: 1px solid #d0caca26;
   /* border-bottom: 1px solid #fefefe; */
 }
