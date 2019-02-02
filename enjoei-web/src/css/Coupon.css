@@ -1,0 +1,87 @@
+
+.coupon-product{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.coupon-product * ul li{
+    list-style: none; 
+    margin: 10px 0 10px 0;
+    
+}
+.coupon-title {
+    grid-column: 1 / -1;
+}
+.coupon-title > ul li{
+    font-weight: 800;
+    margin: 0;
+    position: relative;
+    top: 10px;
+}
+
+.coupon-label{
+  grid-column: span 1;
+}
+
+.coupon-valule{
+    grid-column: span 1;
+    text-align: right;
+    padding-right: 40px;
+}
+
+.coupon-valule ul li{
+    margin-bottom: 0px;
+    position: relative;
+    top: 34px;
+} 
+
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #e4e1df;
+    border-radius: 100%;
+    background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #f77274;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}

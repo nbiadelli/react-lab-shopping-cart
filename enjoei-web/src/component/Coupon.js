@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import '../css/coupon.css';
+import '../css/Coupon.css';
 
 class Coupon extends Component {
   render() {
@@ -14,8 +14,15 @@ class Coupon extends Component {
                 </div>
                 <div className="coupon-label">
                     <ul>
-                        <li><input type="radio"/></li>
-                        <li><input type="radio"/></li>
+                        <li>
+                            <input type="radio" id="test2" name="radio-group" />
+                            <label for="test2">não usar cupom</label>                        
+                        </li>
+                        <li>
+                            <input type="radio" id="test3" name="radio-group" />
+                            <label for="test3">black friday</label>                        
+                        </li>
+
                     </ul>
                 </div>
                 <div className="coupon-valule">

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import img_product from '../img/product.png'
-import Coupon from './coupon';
+import Coupon from './Coupon';
 import '../css/Product.css';
 
 
