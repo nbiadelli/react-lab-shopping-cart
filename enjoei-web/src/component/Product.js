@@ -1,48 +1,22 @@
 import React, { Component } from 'react';
-import img_product from '../img/product.png'
-import Coupon from './Coupon';
+import PropTypes from 'prop-types';
 import '../css/Product.css';
-
-
 
 class Product extends Component {
   render() {
     return (
         <div className="main">
             <div className="img-product">
-                <img src={img_product} alt="imag"/>
+                <img src={this.props.image} alt="imag" title={this.props.title} />
             </div> 
-            <div>
-                <Coupon />
-            </div> 
-            <div className="cost-product">
-                <div className="cost-title">
-                   <ul>
-                       <li>resumo</li>
-                    </ul>
-                </div>
-                <div className="cost-label">
-                    <ul>
-                        <li>valor original</li>
-                        <li>cupom</li>
-                        <li>frete</li>
-                        <li>total</li>
-                    </ul>
-                </div>
-                <div className="cost-valule">
-                    <ul>
-                        <li>R$100,00</li>
-                        <li>R$100,00</li>
-                        <li>R$100,00</li>
-                        <li>R$100,00</li>
-                    </ul>
-                
-                </div>            
-            </div>            
-
         </div>    
     );
   }
+}
+
+Product.propTypes = {
+    title: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired
 }
 
 export default Product;

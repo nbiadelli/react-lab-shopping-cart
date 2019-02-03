@@ -1,0 +1,22 @@
+.modal{
+    text-align: center;
+    font-size: 15px;
+}
+
+.modal > div p{
+    margin: 0;
+}
+
+.imag-corfim{
+    width: 37px;
+    height: 40px;
+    background: url('../img/cart.png') 0 0;
+    margin: 0 auto;
+}
+
+.imag-cancel{
+    width: 37px;
+    height: 40px;
+    background: url('../img/cart.png') 0 -40px;
+    margin: 0 auto;
+}
