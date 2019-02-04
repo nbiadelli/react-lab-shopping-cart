@@ -1,6 +1,6 @@
 .modal{
     text-align: center;
-    font-size: 15px;
+    /* font-size: 15px; */
 }
 
 .modal > div p{
@@ -19,4 +19,11 @@
     height: 40px;
     background: url('../img/cart.png') 0 -40px;
     margin: 0 auto;
+}
+
+.warning {
+    text-align: center;
+    color: orangered;
+    font-weight: 800;
+    padding: 20px;
 }

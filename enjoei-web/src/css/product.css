@@ -40,4 +40,13 @@
     grid-column: span 1;
     text-align: right;
     padding-right: 40px;
+    
+}
+
+.cost-valule ul li:nth-child(2) {
+    color: #f77274;
+}
+
+.cost-valule ul li:nth-child(4) {
+    font-weight: 800;
 }

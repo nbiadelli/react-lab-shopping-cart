@@ -2,39 +2,32 @@ import React, { Component } from 'react';
 import logo_header from './img/logo.png';
 import Product from './component/Product';
 import Checkout from './component/Checkout';
-
+import { getCheckout, postCheckout } from './service/rest';
 import './App.css';
 
-const data = {
-  product: {
-    id: 1321,
-    title: "vestido floral",
-    price: 100,
-    image: "https://res-5.cloudinary.com/enjoei/image/upload/c_fill,fl_lossy.progressive,h_398,q_70,w_375/qzancxcixtocajlrgztv.jpg" 
-  },  
-  checkout: {    
-    id: 6544,
-    productId: 1321,
-    shippingPrice: 20,
-    availableCoupons: [
-      {
-        id: 3,
-        title: "black friday",
-        discount: 35
-      }
-    ],
-    totalPrice: 120
-  }
-};
-
-
 class App extends Component {
-  constructor(props){
-    super(props)
-    this.state = { ...data };
+  constructor(props) {
+    super(props);
+    this.handleGetCheckout = this.handleGetCheckout.bind(this);
+    this.handlePostCheckout = this.handlePostCheckout.bind(this);
+  }
+  
+  async handleGetCheckout(checkoutId, couponId) {
+    const checkout = await getCheckout(checkoutId, couponId);
+      this.setState({ ...checkout });
+  }
+  
+  handlePostCheckout(checkoutId) {
+    return postCheckout(checkoutId);
+  }
+
+  async componentDidMount() {
+    const checkoutId = Math.ceil(Math.random() * 50);
+    await this.handleGetCheckout(checkoutId);
   }
 
   render() {
+    if (this.state && !this.state.error) {
     return (
       <div className="App-container">
         <header className="App-header">
@@ -45,11 +38,18 @@ class App extends Component {
         <main className="cost-container">
           <Product {...this.state.product}/>
           <Checkout 
-            price={this.state.product.price}
+            handleGetCheckout={this.handleGetCheckout}
+            handlePostCheckout={this.handlePostCheckout}
+            product={this.state.product}
             {...this.state.checkout}/>
         </main>
       </div>
     );
+  } else if (this.state && this.state.error) {
+      return <div className="warning">{this.state.error}</div>
+    } else {
+      return <div className="loading">loading...</div>;
+    }
   }
 }
 

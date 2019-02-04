@@ -1,14 +1,10 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import Button from './Button'
-import '../css/Button.css';
+import '../css/button.css';
 import Modal from './Modal'
-import '../css/Coupon.css';
-import '../css/Product.css';
-
-const calcDiscount = (value, discount) =>
-    value - discount;
+import '../css/checkout.css';
+import '../css/product.css';
 
 class Checkout extends Component {
     constructor(props){
@@ -16,7 +12,6 @@ class Checkout extends Component {
         this.state = { 
             showModal: false,
             useCoupon: false,
-            calcTotalPrice: props.totalPrice 
         }
 
         this.handleCancel = this.handleCancel.bind(this);
@@ -26,11 +21,21 @@ class Checkout extends Component {
     }
 
     handleCancel () {
-        this.setState({ showModal: true, message: "cancel" });
+        this.setState({ showModal: true, type: "cancel" });
     }
 
-    handleConfirm () {
-        this.setState({ showModal: true, message: "confirm" });
+    async handleConfirm () {
+        const confirmCheckout = await this.props.handlePostCheckout(1234);
+        console.log("333333333333333", confirmCheckout);
+        if (confirmCheckout.status === "success") {
+            this.setState({ showModal: true, type: "confirm" });
+        } else {
+            this.setState({ 
+                showModal: true,
+                 type: "error", 
+                 message: confirmCheckout.status,
+                });
+        }
     }
     
           
@@ -39,10 +44,9 @@ class Checkout extends Component {
     }
 
     handleCoupon (ev, coupon) {
-        const discount = coupon ? coupon.discount : 0;
-        const tPrice = calcDiscount(this.props.totalPrice, discount)
+        const couponId = coupon ? coupon.id : null;
+        this.props.handleGetCheckout(this.props.product.id, couponId)
         this.setState({ 
-            calcTotalPrice: tPrice,
             useCoupon: !!coupon
         })
     }
@@ -53,6 +57,7 @@ class Checkout extends Component {
                 <Modal 
                     open={this.state.showModal}
                     handleCloseModal={this.handleCloseModal}
+                    type={this.state.type}
                     message={this.state.message}
                 />
                     
@@ -88,7 +93,7 @@ class Checkout extends Component {
                             {
                                 this.props.availableCoupons.map(coupon => 
                                     <li key={coupon.id}>
-                                        - R${coupon.discount}
+                                        - R$ {coupon.discount}
                                     </li>
                                 )
                             }
@@ -111,7 +116,7 @@ class Checkout extends Component {
                     </div>
                     <div className="cost-valule">
                         <ul>
-                            <li>R$ {this.props.price}</li>
+                            <li>R$ {this.props.product.price}</li>
                             {
                                 
                                 this.props.availableCoupons.map(coupon => 
@@ -121,7 +126,7 @@ class Checkout extends Component {
                                 )
                             }
                             <li>R$ {this.props.shippingPrice}</li>
-                            <li>R$ {this.state.calcTotalPrice}</li>
+                            <li>R$ {this.props.totalPrice}</li>
                         </ul>
                     
                     </div>            
@@ -146,6 +151,6 @@ Checkout.propTypes = {
     shippingPrice: PropTypes.number.isRequired,
     totalPrice: PropTypes.number.isRequired,
     availableCoupons: PropTypes.array.isRequired,
-    price: PropTypes.number.isRequired,
+    product: PropTypes.object.isRequired,
 }
 export default Checkout;
