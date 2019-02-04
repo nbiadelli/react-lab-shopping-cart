@@ -49,7 +49,7 @@ body {
   top: calc(100vh /2);
 }
 
-.warning {
+.warning-app {
   text-align: center;
   color: orangered;
   font-weight: 800;
